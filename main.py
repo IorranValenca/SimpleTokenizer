@@ -23,7 +23,7 @@ class BasicTokenizer:
             raw = self._split_pattern.split(text)
             return [piece.strip() for piece in raw if piece.strip()]
         
-        def encode(self, text: str) -> List[int]:
+        def encoder(self, text: str) -> List[int]:
             "pega a string transforma em lista de de tokens id. tokens fora do index vao para <UNK> se tiver, senao pula ele " 
 
             tokens = self._tokenize(text)
@@ -52,7 +52,7 @@ tokens = [tok.strip() for tok in tokens if tok.strip()]
 
 all_tokens  = sorted(set(tokens))               
 vocab_size  = len(all_tokens)                  
-print(vocab_size) 
+
 
 
 vocab = {token: idx for idx, token in enumerate(all_tokens)}  
@@ -65,8 +65,10 @@ tokenizer = BasicTokenizer(vocab)
 
 text = "IdeaWeaver-- a comprehensive CLI tool for AI model training and evaluation?"
 
-ids = tokenizer.encode(text)
+ids = tokenizer.encoder(text)
 
-print(ids)
+decoder_text = tokenizer.decode(ids)
+
+print(decoder_text)
 
 
