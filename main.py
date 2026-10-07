@@ -26,7 +26,7 @@ class BasicTokenizer:
     def encoder(self, text: str) -> List[int]:
         "pega a string transforma em lista de de tokens id. tokens fora do index vao para <UNK> se tiver, senao pula ele " 
 
-        tokens = self._tokenize(text)
+        tokens = self.tokenize(text)
         ids= []
         for tok in tokens:  
             if tok in self.token_index:
