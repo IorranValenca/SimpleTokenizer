@@ -43,3 +43,30 @@ class BasicTokenizer:
             text = "".join(tokens)
 
             return self._rejoin_pattern.sub(r"\1", text)
+
+
+
+text = "IdeaWeaver-- a comprehensive CLI tool for AI model training and evaluation?"
+tokens = re.split(r'([,.:;?_!"()\']|--|\s)', text)
+tokens = [tok.strip() for tok in tokens if tok.strip()]
+
+all_tokens  = sorted(set(tokens))               
+vocab_size  = len(all_tokens)                  
+print(vocab_size) 
+
+
+vocab = {token: idx for idx, token in enumerate(all_tokens)}  
+
+
+for token, idx in vocab.items():
+    print(f"{token}: {idx}")
+
+tokenizer = BasicTokenizer(vocab)
+
+text = "IdeaWeaver-- a comprehensive CLI tool for AI model training and evaluation?"
+
+ids = tokenizer.encode(text)
+
+print(ids)
+
+
