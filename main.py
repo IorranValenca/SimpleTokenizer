@@ -35,3 +35,11 @@ class BasicTokenizer:
                     ids.append(self.unknown_id)
                 
                 return ids 
+            
+        def decode(self, ids: List[int] ) -> str:
+            "pega os ids transforma em tokens e dps bota tudo numa string, voltando tokens com espaço (pra ficar legivel), e corrigindo espaço dps da pontuação"
+
+            tokens = [self.index_token[i] for i in ids if i in self.index_token]
+            text = "".join(tokens)
+
+            return self._rejoin_pattern.sub(r"\1", text)
