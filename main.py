@@ -5,6 +5,11 @@ from typing import List, Dict, Pattern
 
 
 
+
+
+    
+
+
 class BasicTokenizer:
     def __init__(        self,
         token_index: Dict[str, int],
@@ -20,7 +25,7 @@ class BasicTokenizer:
     def tokenize(self, text: str) -> List[str]:
 
         "split na pontuacao double dash ou espaço branco e tira elementos vazios"
-        raw = self._split_pattern.split(text)
+        raw = self.split_pattern.split(text)
         return [piece.strip() for piece in raw if piece.strip()]
     
     def encoder(self, text: str) -> List[int]:
@@ -43,9 +48,10 @@ class BasicTokenizer:
         text = "".join(tokens)
 
         return self._rejoin_pattern.sub(r"\1", text)
+    
 
 
-
+    
 text = "IdeaWeaver-- a comprehensive CLI tool for AI model training and evaluation?"
 tokens = re.split(r'([,.:;?_!"()\']|--|\s)', text)
 tokens = [tok.strip() for tok in tokens if tok.strip()]
@@ -58,8 +64,6 @@ vocab_size  = len(all_tokens)
 vocab = {token: idx for idx, token in enumerate(all_tokens)}  
 
 
-for token, idx in vocab.items():
-    print(f"{token}: {idx}")
 
 tokenizer = BasicTokenizer(vocab)
 
