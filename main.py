@@ -24,4 +24,14 @@ class BasicTokenizer:
             return [piece.strip() for piece in raw if piece.strip()]
         
         def encode(self, text: str) -> List[int]:
-            
+            "pega a string transforma em lista de de tokens id. tokens fora do index vao para <UNK> se tiver, senao pula ele " 
+
+            tokens = self._tokenize(text)
+            ids= []
+            for tok in tokens:  
+                if tok in self.token_index:
+                    ids.append(self.token_index[tok])
+                elif self.unknown_id is not None:
+                    ids.append(self.unknown_id)
+                
+                return ids 
